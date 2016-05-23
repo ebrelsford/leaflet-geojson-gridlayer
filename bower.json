@@ -1,0 +1,28 @@
+{
+  "name": "leaflet.geojsongridlayer",
+  "version": "0.0.1",
+  "homepage": "https://github.com/ebrelsford/leaflet.geojsongridlayer",
+  "authors": [
+    "Eric Brelsford <ebrelsford@gmail.com>"
+  ],
+  "description": "A simple GeoJSON GridLayer for Leaflet",
+  "main": "src/GeoJSONGridLayer.js",
+  "keywords": [
+    "leaflet",
+    "map",
+    "gis",
+    "geoweb",
+    "vector tiles"
+  ],
+  "dependencies": {
+      "leaflet": ">=0.6"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

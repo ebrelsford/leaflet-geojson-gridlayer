@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GeoJSONGridLayer Example</title>
+        <meta charset="utf-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.css" />
+
+        <style>
+            html, body, #map {
+                height: 100%;
+                margin: 0;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+
+        <script src="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.js"></script>
+        <script src="../src/GeoJSONGridLayer.js"></script>
+
+        <script>
+            var map = L.map('map');
+
+            var cartodbAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
+
+            var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+                attribution: cartodbAttribution
+            }).addTo(map);
+
+            map.setView({ lat: 40.7, lng: -74 }, 5);
+
+            var vectorLayer = L.geoJsonGridLayer("http://vector.mapzen.com/osm/water,roads/{z}/{x}/{y}.json?api_key=vector-tiles-KyMZNaZ", {
+                layers: {
+                    'roads': {},
+                    'water': {}
+                }
+            });
+            map.addLayer(vectorLayer);
+        </script>
+    </body>
+</html>
+
