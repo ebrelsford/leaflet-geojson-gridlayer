@@ -16,6 +16,7 @@
 
                 this._url = url;
                 this._geojsons = {};
+                this._features = {};
             },
 
             onAdd: function (map) {
@@ -60,14 +61,8 @@
             },
 
             hasLayerWithId: function (sublayer, id) {
-                if (!this._geojsons[sublayer]) return false;
-                var layers = this._geojsons[sublayer].getLayers();
-                for (var i = 0; i < layers.length; i++) {
-                    if (layers[i].feature.id === id || layers[i].feature.properties.id === id) {
-                        return true;
-                    }
-                }
-                return false;
+                if (!this._geojsons[sublayer] || !this._features[sublayer]) return false;
+                return this._features[sublayer].hasOwnProperty(id);
             },
 
             addData: function (data) {
@@ -89,6 +84,15 @@
                 var toAdd = data.features.filter(function (feature) {
                     return !this.hasLayerWithId(sublayer, feature.id ? feature.id : feature.properties.id);
                 }, this);
+
+                if (!this._features[sublayer]) {
+                    this._features[sublayer] = {};
+                }
+                toAdd.forEach(function (feature) {
+                    var id = feature.id ? feature.id : feature.properties.id;
+                    this._features[sublayer][id] = feature;
+                }, this);
+
                 this._geojsons[sublayer].addData({
                     type: 'FeatureCollection',
                     features: toAdd
