@@ -21,6 +21,16 @@
 
             onAdd: function (map) {
                 L.GridLayer.prototype.onAdd.call(this, map);
+                map.on('zoomanim', this._handleZoom.bind(this));
+            },
+
+            onRemove: function (map) {
+                L.GridLayer.prototype.onRemove.call(this, map);
+                map.off('zoomanim', this._handleZoom.bind(this));
+            },
+
+            _handleZoom: function (e) {
+                this.checkZoomConditions(e.zoom);
             },
 
             createTile: function (coords, done) {
@@ -80,6 +90,7 @@
             addSubLayerData: function (sublayer, data) {
                 if (!this._geojsons[sublayer]) {
                     this._geojsons[sublayer] = new L.geoJson(null, this.options.layers[sublayer]).addTo(this._map);
+                    this.checkZoomConditions(this._map.getZoom());
                 }
                 var toAdd = data.features.filter(function (feature) {
                     return !this.hasLayerWithId(sublayer, feature.id ? feature.id : feature.properties.id);
@@ -96,6 +107,22 @@
                 this._geojsons[sublayer].addData({
                     type: 'FeatureCollection',
                     features: toAdd
+                });
+            },
+
+            checkZoomConditions: function (zoom) {
+                var layers = this._geojsons,
+                    map = this._map;
+                Object.keys(layers).forEach(function (key) {
+                    var layer = layers[key],
+                        options = layer.options;
+                    if ((options.maxZoom && zoom > options.maxZoom) ||
+                        (options.minZoom && zoom < options.minZoom)) {
+                        map.removeLayer(layer);
+                    }
+                    else {
+                        map.addLayer(layer);
+                    }
                 });
             }
         });
