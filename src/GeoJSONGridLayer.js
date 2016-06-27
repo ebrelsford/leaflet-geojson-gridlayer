@@ -70,6 +70,15 @@
                 request.send();
             },
 
+            getLayers: function () {
+                var geojsons = this._geojsons,
+                    layers = [];
+                Object.keys(geojsons).forEach(function (key) {
+                    layers.push(geojsons[key]);
+                });
+                return layers;
+            },
+
             hasLayerWithId: function (sublayer, id) {
                 if (!this._geojsons[sublayer] || !this._features[sublayer]) return false;
                 return this._features[sublayer].hasOwnProperty(id);
