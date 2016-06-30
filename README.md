@@ -13,15 +13,15 @@ Leaflet.GeoJSONGridLayer is only tested on Leaflet version 1.0 or greater. It wi
 
 ## Demos
 
-See Leaflet.GeoJSONGridLayer in action:
+See leaflet-geojson-gridlayer in action:
 
  - Using the [simplest setup][simple], with the loading indicator attached to the zoom control.
 
 
 ## License
 
-Leaflet.GeoJSONGridLayer is free software, and may be redistributed under the MIT License.
+leaflet-geojson-gridlayer is free software, and may be redistributed under the MIT License.
 
 
  [Leaflet]: https://github.com/Leaflet/Leaflet
- [simple]: http://ebrelsford.github.io/Leaflet.GeoJSONGridLayer/simple.html
+ [simple]: http://ebrelsford.github.io/leaflet-geojson-gridlayer/simple.html
