@@ -1,5 +1,5 @@
 {
-  "name": "leaflet-geojsongridlayer",
+  "name": "leaflet-geojson-gridlayer",
   "version": "0.0.1",
   "description": "A simple GeoJSON GridLayer for Leaflet",
   "main": "src/GeoJSONGridLayer.js",

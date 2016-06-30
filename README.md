@@ -1,5 +1,5 @@
-Leaflet.GeoJSONGridLayer
-========================
+leaflet-geojson-gridlayer
+=========================
 
 Add vector tiles in GeoJSON layer to a Leaflet map.
 
