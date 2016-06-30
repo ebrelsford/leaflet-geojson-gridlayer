@@ -17,6 +17,7 @@
                 this._url = url;
                 this._geojsons = {};
                 this._features = {};
+                this.geoJsonClass = (this.options.geoJsonClass ? this.options.geoJsonClass : L.GeoJSON);
             },
 
             onAdd: function (map) {
@@ -98,7 +99,7 @@
 
             addSubLayerData: function (sublayer, data) {
                 if (!this._geojsons[sublayer]) {
-                    this._geojsons[sublayer] = new L.geoJson(null, this.options.layers[sublayer]).addTo(this._map);
+                    this._geojsons[sublayer] = new this.geoJsonClass(null, this.options.layers[sublayer]).addTo(this._map);
                     this.checkZoomConditions(this._map.getZoom());
                 }
                 var toAdd = data.features.filter(function (feature) {
