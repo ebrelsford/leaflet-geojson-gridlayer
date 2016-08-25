@@ -21,13 +21,24 @@
             },
 
             onAdd: function (map) {
+                var layers = this._geojsons;
+                Object.keys(layers).forEach(function (key) {
+                    map.addLayer(layers[key]);
+                });
+
                 L.GridLayer.prototype.onAdd.call(this, map);
-                map.on('zoomanim', this._handleZoom.bind(this));
+                this.zoomanimHandler = this._handleZoom.bind(this);
+                map.on('zoomanim', this.zoomanimHandler);
             },
 
             onRemove: function (map) {
+                var layers = this._geojsons;
+                Object.keys(layers).forEach(function (key) {
+                    map.removeLayer(layers[key]);
+                });
+
                 L.GridLayer.prototype.onRemove.call(this, map);
-                map.off('zoomanim', this._handleZoom.bind(this));
+                map.off('zoomanim', this.zoomanimHandler);
             },
 
             _handleZoom: function (e) {
